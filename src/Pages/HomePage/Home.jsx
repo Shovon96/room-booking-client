@@ -1,8 +1,11 @@
+import Featured from "../../components/Featured/Featured";
+import Slider from "../../components/Slider_banner/Slider";
 
 const Home = () => {
     return (
         <div>
-            This is home
+            <Slider></Slider>
+            <Featured></Featured>
         </div>
     );
 };
