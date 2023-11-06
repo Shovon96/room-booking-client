@@ -3,7 +3,7 @@ import { AuthContext } from "../../components/AuthProvider/AuthProvider";
 
 const Bookings = () => {
 
-    const {user} = useContext(AuthContext)
+    const { user, loading } = useContext(AuthContext)
     const [bookings, setBookings] = useState([]);
     const [total, setTotal] = useState(0)
 
@@ -22,6 +22,24 @@ const Bookings = () => {
         bookings?.map(item => { totalPrice += item?.price })
         setTotal(totalPrice)
     }, [bookings])
+
+    if (loading) {
+        return <div className="flex justify-center items-center h-[80vh]"><span className="loading loading-lg loading-spinner text-primary"></span></div>
+    }
+
+    const handleDelete = id => {
+        fetch(`http://localhost:5000/bookings/${id}`, {
+            method: 'DELETE'
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.deletedCount > 0) {
+                    alert('Booking cencel success')
+                    const remaining = bookings?.filter(item => item?._id !== id);
+                    setBookings(remaining)
+                }
+            })
+    }
 
     return (
         <>
@@ -48,7 +66,7 @@ const Bookings = () => {
                                     </td>
                                     <td className="md:text-xl font-semibold">{item?.name}</td>
                                     <td className="md:text-xl font-semibold">{item?.price}$</td>
-                                    <td><button className="btn btn-sm md:btn-md btn-error text-white">Delete</button></td>
+                                    <td><button onClick={() => handleDelete(item?._id)} className="btn btn-sm md:btn-md btn-error text-white">Delete</button></td>
                                 </tr>
                             )
                         }
