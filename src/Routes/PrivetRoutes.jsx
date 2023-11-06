@@ -10,7 +10,7 @@ const PrivetRoutes = ({ children }) => {
     const location = useLocation()
 
     if(loading){
-        return <div className="flex justify-center items-center h-[80vh]"><span className="loading loading-lg loading-spinner text-error"></span></div>
+        return <div className="flex justify-center items-center h-[80vh]"><span className="loading loading-lg loading-spinner text-primary"></span></div>
     }
 
     if (user) {
@@ -22,7 +22,7 @@ const PrivetRoutes = ({ children }) => {
 };
 
 PrivetRoutes.propTypes = {
-    children: PropTypes.node
+    children: PropTypes.node.isRequired
 }
 
 export default PrivetRoutes;

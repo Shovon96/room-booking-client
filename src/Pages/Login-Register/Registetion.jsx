@@ -1,16 +1,21 @@
 import { Link, useNavigate } from "react-router-dom";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import auth from "../../firebaseConfig/firebase.config";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import { AuthContext } from "../../components/AuthProvider/AuthProvider";
 // import { toast } from "react-toastify";
 
 const Register = () => {
 
-    
+    const { loading } = useContext(AuthContext)
     const [showPassword, setShowPassword] = useState(false)
     const navigate = useNavigate()
 
+    if(loading){
+        return <div className="flex justify-center items-center h-[80vh]"><span className="loading loading-lg loading-spinner text-primary"></span></div>
+    }
+    
     const handleSignUp = e => {
         e.preventDefault()
         const name = e.target.name.value;

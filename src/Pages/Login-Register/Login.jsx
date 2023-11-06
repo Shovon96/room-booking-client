@@ -8,7 +8,7 @@ import { AuthContext } from "../../components/AuthProvider/AuthProvider";
 
 const Login = () => {
 
-    const { signInWithGoogle } = useContext(AuthContext)
+    const { signInWithGoogle, loading } = useContext(AuthContext)
     const location = useLocation()
     const navigate = useNavigate()
 
@@ -16,6 +16,10 @@ const Login = () => {
     // const [loginSuccess, setLoginSuccess] = useState('')
     const [showPassword, setShowPassword] = useState(false)
 
+    if(loading){
+        return <div className="flex justify-center items-center h-[80vh]"><span className="loading loading-lg loading-spinner text-primary"></span></div>
+    }
+    
     const handleSignIn = e => {
         e.preventDefault()
         const email = e.target.email.value;
