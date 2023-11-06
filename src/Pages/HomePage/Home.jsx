@@ -1,4 +1,5 @@
 import Featured from "../../components/Featured/Featured";
+import NewsLetter from "../../components/Newsletter/NewsLetter";
 // import Map from "../../components/GoogleMap/Map";
 import Slider from "../../components/Slider_banner/Slider";
 import Testimonials from "../../components/UserTestimonials/Testimonials";
@@ -11,6 +12,7 @@ const Home = () => {
             <Featured></Featured>
             {/* <SpecialOffers></SpecialOffers> */}
             <Testimonials></Testimonials>
+            <NewsLetter></NewsLetter>
             {/* <Map></Map> */}
         </div>
     );

@@ -5,7 +5,7 @@ const Navbar = () => {
         <NavLink
             to="/"
             className={({ isActive, isPending }) =>
-                isPending ? "pending" : isActive ? "text-lg font-bold underline text-blue-800" : ""
+                isPending ? "pending" : isActive ? "text-lg font-bold underline text-blue-800" : "text-lg font-bold"
             }
         >
             Home
@@ -46,7 +46,8 @@ const Navbar = () => {
                 </ul>
             </div>
             <div className="navbar-end">
-                <a className="btn text-blue-800">Login</a>
+                {/* <a></a> */}
+                <NavLink to='/login' className="btn text-blue-800">Login</NavLink>
             </div>
         </div>
     );
