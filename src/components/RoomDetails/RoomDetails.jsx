@@ -10,7 +10,7 @@ const RoomDetails = () => {
     const { id } = useParams()
     const [roomDetails, setRoomDetails] = useState([]);
     const [selectedDate, setSelectedDate] = useState(null);
-    const {user} = useContext(AuthContext)
+    const {user, loading} = useContext(AuthContext)
 
     // datePicker
     const today = new Date();
@@ -24,12 +24,14 @@ const RoomDetails = () => {
             .then(data => setRoomDetails(data))
     }, [id])
     // console.log(roomDetails);
+    if(loading){
+        return <div className="flex justify-center items-center h-[80vh]"><span className="loading loading-lg loading-spinner text-primary"></span></div>
+    }
 
     const bookingsData = {
         email: user.email,
         image: roomDetails.image,
         price: roomDetails.price,
-        date: roomDetails.date,
         name: roomDetails.name
     }
 
@@ -66,6 +68,7 @@ const RoomDetails = () => {
                             onChange={handleDateChange}
                             minDate={today}
                             placeholderText="Select a date"
+                            required
                         />
                     }</h3>
                 </div>
