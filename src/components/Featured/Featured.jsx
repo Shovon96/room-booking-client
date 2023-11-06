@@ -1,13 +1,20 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../AuthProvider/AuthProvider";
 
 const Featured = () => {
     const [features, setFeatures] = useState([])
 
+    const { loading } = useContext(AuthContext)
+    
     useEffect(()=> {
         fetch('http://localhost:5000/features')
         .then(res => res.json())
         .then(data => setFeatures(data))
     }, [])
+    
+    if(loading){
+        return <div className="flex justify-center items-center h-[80vh]"><span className="loading loading-lg loading-spinner text-primary"></span></div>
+    }
 
     return (
         <div>
