@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { AuthContext } from "../AuthProvider/AuthProvider";
+import UserReview from "../UserReview/UserReview";
 
 
 const RoomDetails = () => {
@@ -76,6 +77,7 @@ const RoomDetails = () => {
             <h4 className="lg:px-24 px-5 py-3 text-lg text-gray-500 font-medium">{roomDetails?.description}</h4>
             <div className="flex justify-center py-3">
                 <button onClick={handleBookings} className="btn btn-primary w-2/6">Book Now</button>
+                <UserReview></UserReview>
             </div>
         </div>
     );
