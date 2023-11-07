@@ -12,7 +12,8 @@ const RoomDetails = () => {
     const { id } = useParams()
     const [roomDetails, setRoomDetails] = useState([]);
     const [selectedDate, setSelectedDate] = useState(null);
-    const [reviews, setReviews] = useState([])
+    const [reviews, setReviews] = useState([]);
+    const [disableBtn, setDisableBtn] = useState(false)
     const { user, loading } = useContext(AuthContext)
 
     // datePicker
@@ -55,6 +56,7 @@ const RoomDetails = () => {
             .then(data => {
                 if (data.insertedId) {
                     alert('Bookings added')
+                    setDisableBtn(true)
                 }
             })
     }
@@ -69,7 +71,7 @@ const RoomDetails = () => {
                     <div>
                         <h2 className="text-blue-500 text-2xl my-2 font-bold">{roomDetails?.name}</h2>
                         <h4 className="text-lg font-semibold my-2">Price: ${roomDetails?.price} <span className="text-sm text-gray-500">perday</span></h4>
-                        <h3 className="text-lg font-semibold mb-2">Reviews: {roomDetails?.reviewCount}</h3>
+                        <h3 className="text-lg font-semibold mb-2">Reviews: {reviews.length}</h3>
                     </div>
                     <div className="text-lg font-semibold my-2">
                         <h2>Room Size: {roomDetails?.roomSize}</h2>
@@ -86,9 +88,18 @@ const RoomDetails = () => {
                     </div>
                 </div>
                 <h4 className="lg:px-24 px-5 py-3 text-lg text-gray-500 font-medium">{roomDetails?.description}</h4>
-                <div className="flex justify-center py-3">
-                    <button onClick={handleBookings} className="btn btn-primary w-2/6">Book Now</button>
-                    <UserReview></UserReview>
+                <div className="flex justify-evenly py-3">
+                    <div>
+                        {
+                            disableBtn ?
+                            <button className="btn cursor-not-allowed" disabled>Booked</button>
+                            :<button onClick={handleBookings} className="btn btn-primary">Book Now</button>
+                        }
+                    </div>
+                    
+                    {/* user review modal show */}
+                    <UserReview disableBtn={disableBtn} setReviews={setReviews}></UserReview>
+
                 </div>
             </div>
 
