@@ -43,7 +43,7 @@ const Bookings = () => {
 
     return (
         <>
-            <h1 className="text-3xl md:text-5xl text-center font-bold mt-8 underline">My carts</h1>
+            <h1 className="text-3xl md:text-5xl text-center font-bold mt-8 underline">My Bookings</h1>
             <div className="overflow-x-auto md:max-w-6xl mx-auto my-12">
                 <table className="table">
                     {/* head */}
