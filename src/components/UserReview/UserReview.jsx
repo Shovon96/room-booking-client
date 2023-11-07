@@ -5,7 +5,7 @@ const UserReview = () => {
 
     const { user } = useContext(AuthContext)
 
-    const handleReview = e => {
+    const handleReviewSubmit = e => {
         e.preventDefault()
         const form = e.target;
         const name = form.name.value;
@@ -13,6 +13,18 @@ const UserReview = () => {
         const comment = form.comment.value
         const review = { name, rating, comment }
         console.log(review);
+        
+        fetch('http://localhost:5000/reviews', {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(review)
+        })
+        .then(res => res.json())
+        .then(data => {
+            if(data.insertedId){
+                alert('Thanks for your review')
+            }
+        })
     }
 
     return (
@@ -26,7 +38,7 @@ const UserReview = () => {
                         <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
                     </form>
                     <h3 className="font-bold text-lg">Review This Room!!</h3>
-                    <form onSubmit={handleReview}>
+                    <form onSubmit={handleReviewSubmit}>
                         <input name="name" type="text" defaultValue={user.displayName} className="input input-ghost w-full max-w-xs" />
                         <input name="rating" type="text" placeholder="Please Reting This Room" className="input input-ghost w-full max-w-xs" />
                         <input name="comment" type="text" placeholder="Add a comment" className="input input-ghost w-full max-w-xs" /><br /><br />
