@@ -22,7 +22,7 @@ const PrivetRoutes = ({ children }) => {
 };
 
 PrivetRoutes.propTypes = {
-    children: PropTypes.node.isRequired
+    children: PropTypes.node
 }
 
 export default PrivetRoutes;
