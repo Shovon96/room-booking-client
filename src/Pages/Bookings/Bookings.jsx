@@ -10,7 +10,7 @@ const Bookings = () => {
     const [total, setTotal] = useState(0)
 
     useEffect(() => {
-        fetch(`http://localhost:5000/bookings/${user?.email}`, { credentials: "include" })
+        fetch(`https://room-booking-server-bice.vercel.app/bookings/${user?.email}`, { credentials: "include" })
             .then(res => res.json())
             .then(data => {
                 // console.log(data);
@@ -30,7 +30,7 @@ const Bookings = () => {
     }
 
     const handleDelete = id => {
-        fetch(`http://localhost:5000/bookings/${id}`, {
+        fetch(`https://room-booking-server-bice.vercel.app/bookings/${id}`, {
             method: 'DELETE'
         })
             .then(res => res.json())

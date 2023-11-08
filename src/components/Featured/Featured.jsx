@@ -7,7 +7,7 @@ const Featured = () => {
     const { loading } = useContext(AuthContext)
 
     useEffect(() => {
-        fetch('http://localhost:5000/features')
+        fetch('https://room-booking-server-bice.vercel.app/features')
             .then(res => res.json())
             .then(data => setFeatures(data))
     }, [])

@@ -17,7 +17,7 @@ const UserReview = ({ disableBtn }) => {
         // form.replace()
         // console.log(review);
 
-        fetch('http://localhost:5000/reviews', {
+        fetch('https://room-booking-server-bice.vercel.app/reviews', {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(review)
@@ -35,11 +35,11 @@ const UserReview = ({ disableBtn }) => {
             <div>
                 {
                     disableBtn ?
-                    <button className="btn btn-primary" onClick={() => document.getElementById('my_modal_3').showModal()}>Review</button>
-                    : <button className="btn btn-primary" disabled onClick={() => document.getElementById('my_modal_3').showModal()}>Review</button>
+                        <button className="btn btn-primary" onClick={() => document.getElementById('my_modal_3').showModal()}>Review</button>
+                        : <button className="btn btn-primary" disabled onClick={() => document.getElementById('my_modal_3').showModal()}>Review</button>
                 }
             </div>
-            
+
             <dialog id="my_modal_3" className="modal">
                 <div className="modal-box">
                     <form method="dialog">

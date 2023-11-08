@@ -25,14 +25,14 @@ const RoomDetails = () => {
     };
 
     useEffect(() => {
-        fetch(`http://localhost:5000/rooms/${id}`)
+        fetch(`https://room-booking-server-bice.vercel.app/rooms/${id}`)
             .then(res => res.json())
             .then(data => setRoomDetails(data))
     }, [id])
     // console.log(roomDetails);
 
     useEffect(() => {
-        fetch('http://localhost:5000/reviews')
+        fetch('https://room-booking-server-bice.vercel.app/reviews')
             .then(res => res.json())
             .then(data => setReviews(data))
     }, [])
@@ -60,7 +60,7 @@ const RoomDetails = () => {
         })
             .then((result) => {
                 if (result.isConfirmed) {
-                    fetch('http://localhost:5000/bookings', {
+                    fetch('https://room-booking-server-bice.vercel.app/bookings', {
                         method: "POST",
                         headers: { "Content-Type": "application/json" },
                         body: JSON.stringify(bookingsData)
@@ -83,9 +83,9 @@ const RoomDetails = () => {
 
     return (
         <>
-        <Helmet>
-            <title>Hotel | RoomDetails</title>
-        </Helmet>
+            <Helmet>
+                <title>Hotel | RoomDetails</title>
+            </Helmet>
             <div className="max-w-6xl mx-auto mb-8 shadow-lg">
                 <img className="w-full h-[90vh] rounded-md" src={roomDetails?.image} alt="" />
 
@@ -126,23 +126,28 @@ const RoomDetails = () => {
             </div>
 
             <div>
-                <h1 className="text-5xl font-bold text-center my-6">Customer Review</h1>
+                <h1 className="text-4xl font-bold text-center my-6">Customer Review</h1>
                 <div className="max-w-3xl my-6 mx-auto grid grid-cols-2 gap-12">
                     {
-                        reviews.map(review =>
-                            <div className=" shadow-xl rounded-lg p-4" key={review._id}>
-                                <img className="h-10 w-10 mx-2 rounded-full" src={user?.photoURL} alt="" />
-                                <h2 className="font-bold my-2">{review?.name}</h2>
-                                <h2 className="text-gray-500">Date: {review?.date}</h2>
-                                <Rating
-                                    initialRating={review?.rating}
-                                    emptySymbol={<span className="text-gray-300 text-xl">☆</span>}
-                                    fullSymbol={<span className="text-yellow-500 text-xl">★</span>}
-                                    readonly
-                                />
-                                <p>{review?.comment}</p>
+                        reviews.length === 0 ?
+                            <div>
+                                <p className="text-lg text-end my-6 text-gray-400">No Review Available</p>
                             </div>
-                        )
+                            :
+                            reviews.map(review =>
+                                <div className=" shadow-xl rounded-lg p-4" key={review._id}>
+                                    <img className="h-10 w-10 mx-2 rounded-full" src={user?.photoURL} alt="" />
+                                    <h2 className="font-bold my-2">{review?.name}</h2>
+                                    <h2 className="text-gray-500">Date: {review?.date}</h2>
+                                    <Rating
+                                        initialRating={review?.rating}
+                                        emptySymbol={<span className="text-gray-300 text-xl">☆</span>}
+                                        fullSymbol={<span className="text-yellow-500 text-xl">★</span>}
+                                        readonly
+                                    />
+                                    <p>{review?.comment}</p>
+                                </div>
+                            )
                     }
                 </div>
             </div>

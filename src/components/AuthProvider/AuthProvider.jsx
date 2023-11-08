@@ -29,7 +29,7 @@ const AuthProvider = ({ children }) => {
           setUser(currentUser);
           setLoading(false);
           const loggedUser = { email: userEmail };
-          const url = "http://localhost:5000/jwt";
+          const url = "https://room-booking-server-bice.vercel.app/jwt";
           console.log('req sent')
           if (currentUser) {
             axios
@@ -39,7 +39,7 @@ const AuthProvider = ({ children }) => {
               .then((res) => console.log(res.data));
           } else {
             axios
-              .post("http://localhost:5000/logout", loggedUser, {
+              .post("https://room-booking-server-bice.vercel.app/logout", loggedUser, {
                 withCredentials: true,
               })
               .then((res) => console.log("cookie cleared", res.data));

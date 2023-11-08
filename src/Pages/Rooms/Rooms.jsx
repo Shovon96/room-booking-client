@@ -9,13 +9,13 @@ const Rooms = () => {
     const {loading} = useContext(AuthContext)
 
     useEffect(() => {
-        fetch('http://localhost:5000/rooms')
+        fetch('https://room-booking-server-bice.vercel.app/rooms')
             .then(res => res.json())
             .then(data => setRooms(data))
     }, [])
 
     const handleSortPrice = () => {
-        fetch('http://localhost:5000/sort?sort=true')
+        fetch('https://room-booking-server-bice.vercel.app/sort?sort=true')
         .then(res => res.json())
         .then(data => setRooms(data))
     }
