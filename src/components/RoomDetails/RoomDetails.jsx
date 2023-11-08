@@ -6,6 +6,7 @@ import { AuthContext } from "../AuthProvider/AuthProvider";
 import UserReview from "../UserReview/UserReview";
 import Rating from "react-rating";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet";
 
 
 const RoomDetails = () => {
@@ -82,6 +83,9 @@ const RoomDetails = () => {
 
     return (
         <>
+        <Helmet>
+            <title>Hotel | RoomDetails</title>
+        </Helmet>
             <div className="max-w-6xl mx-auto mb-8 shadow-lg">
                 <img className="w-full h-[90vh] rounded-md" src={roomDetails?.image} alt="" />
 

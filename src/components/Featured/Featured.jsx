@@ -5,14 +5,14 @@ const Featured = () => {
     const [features, setFeatures] = useState([])
 
     const { loading } = useContext(AuthContext)
-    
-    useEffect(()=> {
+
+    useEffect(() => {
         fetch('http://localhost:5000/features')
-        .then(res => res.json())
-        .then(data => setFeatures(data))
+            .then(res => res.json())
+            .then(data => setFeatures(data))
     }, [])
-    
-    if(loading){
+
+    if (loading) {
         return <div className="flex justify-center items-center h-[80vh]"><span className="loading loading-lg loading-spinner text-primary"></span></div>
     }
 
@@ -25,12 +25,15 @@ const Featured = () => {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
                 {
-                    features.map(feature => 
-                        <div className="shadow-md rounded-md" key={feature._id}>
+                    features.map(feature =>
+                        <div
+                            data-aos="zoom-in-down"
+                            data-aos-duration="2000" 
+                            className="shadow-md rounded-md" key={feature._id}>
                             <img className="h-72 rounded-md" src={feature.ImageURL} alt="" />
                             <h1 className="p-2 text-center text-blue-600 font-semibold">{feature.title}</h1>
                         </div>
-                        )
+                    )
                 }
             </div>
         </div>

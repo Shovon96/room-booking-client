@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../components/AuthProvider/AuthProvider";
 import toast from "react-hot-toast";
+import { Helmet } from "react-helmet";
 
 const Bookings = () => {
 
@@ -9,7 +10,7 @@ const Bookings = () => {
     const [total, setTotal] = useState(0)
 
     useEffect(() => {
-        fetch(`http://localhost:5000/bookings/${user?.email}`, {credentials: "include"})
+        fetch(`http://localhost:5000/bookings/${user?.email}`, { credentials: "include" })
             .then(res => res.json())
             .then(data => {
                 // console.log(data);
@@ -44,6 +45,9 @@ const Bookings = () => {
 
     return (
         <>
+            <Helmet>
+                <title>Hotle | Bookings</title>
+            </Helmet>
             <h1 className="text-3xl md:text-5xl text-center font-bold mt-8 underline">My Bookings</h1>
             <div className="overflow-x-auto md:max-w-6xl mx-auto my-12">
                 <table className="table">

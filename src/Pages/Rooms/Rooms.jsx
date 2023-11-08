@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../components/AuthProvider/AuthProvider";
+import { Helmet } from "react-helmet";
 
 const Rooms = () => {
 
@@ -12,11 +13,6 @@ const Rooms = () => {
             .then(res => res.json())
             .then(data => setRooms(data))
     }, [])
-
-    // useEffect(()=> {
-    //     fetch('http://localhost:5000/sort?sort=true')
-    //     .then(res => res.json())
-    // }, [])
 
     const handleSortPrice = () => {
         fetch('http://localhost:5000/sort?sort=true')
@@ -30,6 +26,9 @@ const Rooms = () => {
 
     return (
         <div>
+            <Helmet>
+                <title>Hotel | Rooms</title>
+            </Helmet>
             <div className="text-center">
                 <h1 className="text-5xl font-bold">Hotel Room Gallery</h1>
                 <h3 className="text-2xl font-semibold my-2">Welcome to Hotel Unparalleled Comfort and Elegance!</h3>
