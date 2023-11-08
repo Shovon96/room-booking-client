@@ -5,6 +5,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 import UserReview from "../UserReview/UserReview";
 import Rating from "react-rating";
+import Swal from "sweetalert2";
 
 
 const RoomDetails = () => {
@@ -47,15 +48,32 @@ const RoomDetails = () => {
     }
 
     const handleBookings = () => {
-        fetch('http://localhost:5000/bookings', {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(bookingsData)
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, Book it!"
         })
-            .then(res => res.json())
-            .then(data => {
-                if (data.insertedId) {
-                    alert('Bookings added')
+            .then((result) => {
+                if (result.isConfirmed) {
+                    fetch('http://localhost:5000/bookings', {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify(bookingsData)
+                    })
+                        .then(res => res.json())
+                        .then(data => {
+                            if (data.insertedId) {
+                                Swal.fire({
+                                    title: "Booked it!",
+                                    text: "Your room has been booked.",
+                                    icon: "success"
+                                });
+                            }
+                        });
                     setDisableBtn(true)
                 }
             })
@@ -92,13 +110,13 @@ const RoomDetails = () => {
                     <div>
                         {
                             disableBtn ?
-                            <button className="btn cursor-not-allowed" disabled>Booked</button>
-                            :<button onClick={handleBookings} className="btn btn-primary">Book Now</button>
+                                <button className="btn cursor-not-allowed" disabled>Booked</button>
+                                : <button onClick={handleBookings} className="btn btn-primary">Book Now</button>
                         }
                     </div>
-                    
+
                     {/* user review modal show */}
-                    <UserReview disableBtn={disableBtn} setReviews={setReviews}></UserReview>
+                    <UserReview disableBtn={disableBtn}></UserReview>
 
                 </div>
             </div>
@@ -111,6 +129,7 @@ const RoomDetails = () => {
                             <div className=" shadow-xl rounded-lg p-4" key={review._id}>
                                 <img className="h-10 w-10 mx-2 rounded-full" src={user?.photoURL} alt="" />
                                 <h2 className="font-bold my-2">{review?.name}</h2>
+                                <h2 className="text-gray-500">Date: {review?.date}</h2>
                                 <Rating
                                     initialRating={review?.rating}
                                     emptySymbol={<span className="text-gray-300 text-xl">☆</span>}

@@ -10,8 +10,10 @@ const UserReview = ({ disableBtn }) => {
         const form = e.target;
         const name = form.name.value;
         const rating = form.rating.value;
+        const date = form.date.value;
         const comment = form.comment.value
-        const review = { name, rating, comment }
+        const review = { name, rating, date, comment }
+        // form.replace()
         // console.log(review);
 
         fetch('http://localhost:5000/reviews', {
@@ -47,9 +49,10 @@ const UserReview = ({ disableBtn }) => {
                     <form onSubmit={handleReviewSubmit}>
                         <input name="name" type="text" defaultValue={user.displayName} className="input input-ghost w-full max-w-xs" />
                         <input name="rating" type="text" placeholder="Please Reting This Room" className="input input-ghost w-full max-w-xs" />
+                        <input name="date" type="date" className="input input-ghost w-full max-w-xs" />
                         <input name="comment" type="text" placeholder="Add a comment" className="input input-ghost w-full max-w-xs" /><br /><br />
                         <button className="btn btn-primary">Submit</button>
-                        {/* <Link to='/rooms' className="btn btn-primary">Submit</Link> */}
+                        {/* <Link to='`/roomDetails' className="btn btn-primary">Submit</Link> */}
                     </form>
                 </div>
             </dialog>
