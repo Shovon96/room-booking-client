@@ -20,7 +20,7 @@
 
 - In this website set cookie parser and authonticate with jwt.
 
-- The booking page you will show just your 
+- The booking page you will show just your booking rooms and details.
 
 - In this project have two privet routes and room details and booking page are also privet. If you are't login this website, you don't show privet routes or pages.
 
