@@ -9,10 +9,10 @@ const Bookings = () => {
     const [total, setTotal] = useState(0)
 
     useEffect(() => {
-        fetch(`http://localhost:5000/bookings/${user?.email}`)
+        fetch(`http://localhost:5000/bookings/${user?.email}`, {credentials: "include"})
             .then(res => res.json())
             .then(data => {
-                console.log(data);
+                // console.log(data);
                 setBookings(data)
             })
     }, [user?.email])
