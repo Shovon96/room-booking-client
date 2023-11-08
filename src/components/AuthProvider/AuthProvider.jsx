@@ -23,17 +23,6 @@ const AuthProvider = ({ children }) => {
         return signOut(auth)
     }
 
-    // observe auth state change
-    // useEffect(() => {
-    //     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
-    //     setLoading(false)
-    //         setUser(currentUser)
-    //     })
-    //     return () => {
-    //         unSubscribe()
-    //     }
-    // }, [])
-
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
           const userEmail = currentUser?.email || user?.email;
