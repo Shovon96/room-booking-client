@@ -4,6 +4,7 @@ import auth from "../../firebaseConfig/firebase.config";
 import { useContext, useState } from "react";
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { AuthContext } from "../../components/AuthProvider/AuthProvider";
+import toast from "react-hot-toast";
 // import { toast } from "react-toastify";
 
 const Register = () => {
@@ -25,12 +26,12 @@ const Register = () => {
         // console.log(name, photo, email, password);
 
         if (password.length < 6) {
-            alert('password should be 6 charecter')
+            toast.error('password should be 6 charecter!');
             return;
         }
         // passWord validation
         else if (!/^(?=.*[A-Z])(?=.*[!@#\$%\^&\*])(?=.{6,})/.test(password)) {
-            alert('At least one uppercase charecter, one number and one special charecter must be added')
+            toast.error('At least one uppercase charecter, one number and one special charecter must be added');
             return;
         }
 
@@ -38,11 +39,11 @@ const Register = () => {
         createUserWithEmailAndPassword(auth, email, password)
             .then(() => {
                 navigate('/')
-                alert('User Created Success !')
+                toast.success('User Created Success!');
                 e.target.reset()
             })
             .catch(error => {
-                alert(error.message)
+                toast.error(error.message);
             })
     }
 

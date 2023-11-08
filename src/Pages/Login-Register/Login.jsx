@@ -4,6 +4,7 @@ import auth from "../../firebaseConfig/firebase.config";
 import { useContext, useState } from "react";
 import { FaEye, FaEyeSlash, FaGithub, FaGoogle } from "react-icons/fa";
 import { AuthContext } from "../../components/AuthProvider/AuthProvider";
+import toast from "react-hot-toast";
 
 
 const Login = () => {
@@ -32,13 +33,12 @@ const Login = () => {
         // Login user
         signInWithEmailAndPassword(auth, email, password)
             .then(() => {
-                // setLoginSuccess('User Login Successfully')
-                alert('login success')
+                toast.success('Loging Successfully');
                 navigate(location?.state ? location.state : '/')
                 e.target.reset()
             })
             .catch(error => {
-                alert(error.message)
+                toast.error(error.massege);
                 // setLoginError(error.message)
             })
     }
@@ -47,10 +47,10 @@ const Login = () => {
         signInWithGoogle()
             .then(() => {
                 navigate(location?.state ? location.state : '/')
-                alert('login success')
+                toast.success('Loging Successfully!');
             })
             .catch(error => {
-                alert(error.message)
+                toast.error(error.message);
             })
     }
 

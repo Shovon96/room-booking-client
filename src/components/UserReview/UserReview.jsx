@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { AuthContext } from "../AuthProvider/AuthProvider";
+import toast from "react-hot-toast";
 
 const UserReview = ({ disableBtn }) => {
 
@@ -24,7 +25,7 @@ const UserReview = ({ disableBtn }) => {
             .then(res => res.json())
             .then(data => {
                 if (data.insertedId) {
-                    alert('Thanks for your review')
+                    toast.success('Thanks for your review!');
                 }
             })
     }

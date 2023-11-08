@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../components/AuthProvider/AuthProvider";
+import toast from "react-hot-toast";
 
 const Bookings = () => {
 
@@ -34,7 +35,7 @@ const Bookings = () => {
             .then(res => res.json())
             .then(data => {
                 if (data.deletedCount > 0) {
-                    alert('Booking cencel success')
+                    toast.success('Booking cencel success!');
                     const remaining = bookings?.filter(item => item?._id !== id);
                     setBookings(remaining)
                 }
